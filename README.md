@@ -22,7 +22,7 @@ Markdown. Together, these patterns provide a highly modular and extensible archi
 that illustrates clean software design principles.
 
 # GitHub Repository Link:
-https://github.com/{YOUR_USERNAME}/cs-665-assignment-{ASSIGNMENT_NUMBER}
+[https://github.com/{YOUR_USERNAME}/cs-665-assignment-{ASSIGNMENT_NUMBER}](https://github.com/Casthecat/cs-665-term-project)
 
 # Implementation Description 
 
