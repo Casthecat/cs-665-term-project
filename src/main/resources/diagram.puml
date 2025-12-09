@@ -1,0 +1,111 @@
+@startuml
+
+title Notification System - Bridge + Strategy UML Diagram
+
+' ===========================
+' Interfaces (Bridge + Strategy)
+' ===========================
+
+interface MessageSender {
+    + sendMessage(content: String, user: String)
+}
+
+interface MessageFormatter {
+    + format(title: String, body: String): String
+}
+
+' ===========================
+' Abstract Notification (Bridge Abstraction)
+' ===========================
+
+abstract class Notification {
+    - sender: MessageSender
+    - formatter: MessageFormatter
+
+    + Notification(sender: MessageSender, formatter: MessageFormatter)
+    + send(user: String)
+    + setSender(sender: MessageSender)
+    + setFormatter(formatter: MessageFormatter)
+
+    # generateTitle(): String
+    # generateBody(): String
+}
+
+' ===========================
+' Concrete Notification Types
+' ===========================
+
+class WelcomeNotification {
+    + generateTitle(): String
+    + generateBody(): String
+}
+
+class PromotionNotification {
+    + generateTitle(): String
+    + generateBody(): String
+}
+
+class AlertNotification {
+    + generateTitle(): String
+    + generateBody(): String
+}
+
+class SummaryNotification {
+    + generateTitle(): String
+    + generateBody(): String
+}
+
+Notification <|-- WelcomeNotification
+Notification <|-- PromotionNotification
+Notification <|-- AlertNotification
+Notification <|-- SummaryNotification
+
+' ===========================
+' Concrete Senders (Bridge Implementors)
+' ===========================
+
+class EmailSender {
+    + sendMessage(content: String, user: String)
+}
+
+class SmsSender {
+    + sendMessage(content: String, user: String)
+}
+
+class PushSender {
+    + sendMessage(content: String, user: String)
+}
+
+MessageSender <|.. EmailSender
+MessageSender <|.. SmsSender
+MessageSender <|.. PushSender
+
+' ===========================
+' Concrete Formatters (Strategy)
+' ===========================
+
+class PlainTextFormatter {
+    + format(title: String, body: String): String
+}
+
+class HtmlFormatter {
+    + format(title: String, body: String): String
+}
+
+class MarkdownFormatter {
+    + format(title: String, body: String): String
+}
+
+MessageFormatter <|.. PlainTextFormatter
+MessageFormatter <|.. HtmlFormatter
+MessageFormatter <|.. MarkdownFormatter
+
+' ===========================
+' Relationships (bridge links)
+' ===========================
+
+Notification *-- MessageSender
+Notification *-- MessageFormatter
+
+
+@enduml
